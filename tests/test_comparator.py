@@ -1,5 +1,5 @@
 """
-test_comparator.py: Comparator birim testi
+test_comparator.py: The table comparison Test is not currently in development and testing phase
 """
 import pytest
 from pydbcontrol.db_connector import DBConnector

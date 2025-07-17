@@ -1,18 +1,18 @@
 """
-Comparator: Yapısı aynı olan iki tabloyu karşılaştıran sınıf.
+Comparator: Class that compares two tables with the same structure.
 """
 from .db_connector import DBConnector
 
 class Comparator:
     def __init__(self, db: DBConnector):
         """
-        DBConnector nesnesi ile başlatılır.
+        Initializes the Comparator with a DBConnector instance.
         """
         self.db = db
 
     def compare_tables(self, table1: str, table2: str, key_column: str = 'id'):
         """
-        İki tabloyu anahtar kolona göre karşılaştırır, farkları döndürür.
+        Compares two tables by the key column and returns the differences.
         """
         sql1 = f"SELECT * FROM {table1}"
         sql2 = f"SELECT * FROM {table2}"

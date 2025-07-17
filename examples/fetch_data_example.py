@@ -1,19 +1,24 @@
 """
-fetch_data_example.py: Tablo verisi çekme örneği
+fetch_data_example.py: Example script to fetch data from a specific table with filters
 """
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from pydbcontrol.db_connector import DBConnector
 from pydbcontrol.table_manager import TableManager
 
-# Bağlantı parametreleri
-conn = DBConnector(host="localhost", database="cortex_veritabani", user="seydanur", password="211905")
-conn.connect()
+# Connection parameters
+db = DBConnector()
+db.connect()
 
-# Tablo yöneticisi
-tm = TableManager(conn, "telecommand_unit2")
+# Table manager
+tm = TableManager(db, "telecommand_unit2")
 
-# Filtreli veri çekme
-filters = {"op_mode": 1}
+# Filtered data retrieval
+filters = {"op_mode": 2,
+           "shift_key_mode": 5}
 data = tm.get_data(filters=filters, limit=5)
-print(data)
+print(f'Requested data: ', data)
 
-conn.disconnect()
+db.disconnect()

@@ -1,19 +1,19 @@
 """
-TableManager: Tablo üzerinde okuma, ekleme, güncelleme ve silme işlemlerini yöneten sınıf.
+TableManager: Class for managing read, insert, update, and delete operations on a table.
 """
 from .db_connector import DBConnector
 
 class TableManager:
     def __init__(self, db: DBConnector, table_name: str):
         """
-        Tablo adı ve DBConnector nesnesi ile başlatılır.
+        Initialize with table name and DBConnector instance.
         """
         self.db = db
         self.table_name = table_name
 
     def table_creator(self, model_sql_path: str):
         """
-        Belirtilen model klasöründeki .sql dosyasından CREATE TABLE komutunu okuyup çalıştırır.
+        Reads CREATE TABLE statement from the specified .sql file in the model folder and executes it.
         """
         with open(model_sql_path, "r", encoding="utf-8") as f:
             sql = f.read()
@@ -22,7 +22,7 @@ class TableManager:
 
     def get_data(self, filters=None, limit=10):
         """
-        Tabloyu filtreleyerek veri çeker.
+        Fetches data from the table with optional filters.
         """
         sql = f"SELECT * FROM {self.table_name}"
         params = []
@@ -36,7 +36,7 @@ class TableManager:
 
     def insert_row(self, data: dict):
         """
-        Yeni bir satır ekler.
+        Inserts a new row into the table.
         """
         fields = ', '.join(data.keys())
         placeholders = ', '.join(['%s'] * len(data))
@@ -45,7 +45,7 @@ class TableManager:
 
     def update_row(self, row_id: int, new_values: dict):
         """
-        Belirtilen satırı günceller.
+        Updates the specified row in the table.
         """
         set_clause = ', '.join([f"{k}=%s" for k in new_values.keys()])
         sql = f"UPDATE {self.table_name} SET {set_clause} WHERE id=%s"
@@ -54,7 +54,7 @@ class TableManager:
 
     def delete_row(self, row_id: int):
         """
-        Belirtilen satırı siler.
+        Deletes the specified row from the table.
         """
         sql = f"DELETE FROM {self.table_name} WHERE id=%s"
         self.db.execute_query(sql, [row_id], fetch=False)

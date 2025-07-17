@@ -9,7 +9,7 @@ from psycopg2.extras import RealDictCursor
 class DBConnector:
     def __init__(self, host=None, database=None, user=None, password=None, port=None):
         """
-        The database retrieves connection parameters from the .env file or directly.
+        Initializes the DBConnector with connection parameters from the .env file or directly.
         The .env file must contain the following keys:
         DB_HOST, DB_NAME, DB_USER, DB_PASSWORD, DB_PORT
         """
@@ -22,8 +22,10 @@ class DBConnector:
         self.conn = None
 
     def connect(self):
-        """        
-        Connects to the database.
+        """
+        Establishes a connection to the PostgreSQL database using the provided parameters.
+        Returns:
+            psycopg2 connection object
         """
         self.conn = psycopg2.connect(
             host=self.host,
@@ -36,7 +38,7 @@ class DBConnector:
 
     def disconnect(self):
         """
-        Disconnects from the database.
+        Closes the database connection if it is open.
         """
         if self.conn:
             self.conn.close()
@@ -45,6 +47,12 @@ class DBConnector:
     def execute_query(self, query, params=None, fetch=True):
         """
         Executes a SQL query on the connected database.
+        Args:
+            query (str): The SQL query to execute.
+            params (tuple or dict, optional): Parameters to pass with the query.
+            fetch (bool): If True, fetches and returns results; if False, commits changes.
+        Returns:
+            list[dict] or None: Query results if fetch is True, otherwise None.
         """
         if not self.conn:
             self.connect()

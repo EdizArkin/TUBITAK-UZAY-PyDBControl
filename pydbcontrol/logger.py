@@ -1,12 +1,12 @@
 """
-Logger: İşlem geçmişini log dosyasına yazan sınıf.
+Logger: Class that writes the operation history to a log file.
 """
 import logging
 
 class Logger:
     def __init__(self, log_file='pydbcontrol.log'):
         """
-        Log dosyasını başlatır.
+        Initializes the logger and sets up the log file.
         """
         self.logger = logging.getLogger('PyDBControlLogger')
         self.logger.setLevel(logging.INFO)
@@ -17,6 +17,6 @@ class Logger:
 
     def log_action(self, action: str, detail: str = ""):
         """
-        İşlem ve detayını loglar.
+        Logs the action and its details to the log file.
         """
         self.logger.info(f"{action}: {detail}")

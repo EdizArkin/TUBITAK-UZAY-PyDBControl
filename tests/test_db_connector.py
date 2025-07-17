@@ -1,5 +1,5 @@
 """
-test_db_connector.py: DBConnector birim testi
+test_db_connector.py: DBConnector unit testing
 """
 import sys
 import os

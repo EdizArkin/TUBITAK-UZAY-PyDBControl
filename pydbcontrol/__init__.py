@@ -1,1 +1,1 @@
-# pydbcontrol modülü başlatıcı dosyası
+# pydbcontrol module initializer file
