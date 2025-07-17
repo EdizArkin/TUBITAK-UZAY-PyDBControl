@@ -1,0 +1,9 @@
+@startuml
+actor Kullanici
+package "PyDBControl Kütüphanesi" {
+  [API Katmanı] --> [İş Mantığı Katmanı]
+  [İş Mantığı Katmanı] --> [Veri Erişim Katmanı]
+  [Veri Erişim Katmanı] --> [PostgreSQL Veritabanı]
+}
+Kullanici --> [API Katmanı]
+@enduml

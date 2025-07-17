@@ -1,0 +1,27 @@
+@startuml
+class DBConnector {
+  +connect()
+  +disconnect()
+  +execute_query()
+}
+class TableManager {
+  +get_data()
+  +insert_row()
+  +update_row()
+  +delete_row()
+}
+class Comparator {
+  +compare_tables()
+}
+class Logger {
+  +log_action()
+}
+class Utils {
+  +validate_schema()
+}
+DBConnector <.. TableManager
+Logger <.. TableManager
+Comparator --> DBConnector
+Comparator --> Logger
+Utils <.. TableManager
+@enduml
