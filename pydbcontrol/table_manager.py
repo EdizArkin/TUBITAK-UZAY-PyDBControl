@@ -18,7 +18,7 @@ class TableManager:
         with open(model_sql_path, "r", encoding="utf-8") as f:
             sql = f.read()
         self.db.execute_query(sql, fetch=False)
-        return f"Tablo başarıyla oluşturuldu: {self.table_name}"
+        return f"Created succesfully: {self.table_name}"
 
     def get_data(self, filters=None, limit=10):
         """

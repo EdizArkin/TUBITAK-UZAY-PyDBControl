@@ -1,5 +1,5 @@
 """
-DBConnector: PostgreSQL veritabanı bağlantılarını ve sorgu yürütmeyi yöneten sınıf.
+DBConnector: Class that manages PostgreSQL database connections and query execution.
 """
 import os
 from dotenv import load_dotenv
@@ -9,8 +9,8 @@ from psycopg2.extras import RealDictCursor
 class DBConnector:
     def __init__(self, host=None, database=None, user=None, password=None, port=None):
         """
-        Veritabanı bağlantı parametrelerini .env dosyasından veya doğrudan alır.
-        .env dosyasında şu anahtarlar olmalı:
+        The database retrieves connection parameters from the .env file or directly.
+        The .env file must contain the following keys:
         DB_HOST, DB_NAME, DB_USER, DB_PASSWORD, DB_PORT
         """
         load_dotenv()
@@ -22,8 +22,8 @@ class DBConnector:
         self.conn = None
 
     def connect(self):
-        """
-        Veritabanına bağlanır.
+        """        
+        Connects to the database.
         """
         self.conn = psycopg2.connect(
             host=self.host,
@@ -36,7 +36,7 @@ class DBConnector:
 
     def disconnect(self):
         """
-        Veritabanı bağlantısını kapatır.
+        Disconnects from the database.
         """
         if self.conn:
             self.conn.close()
@@ -44,7 +44,7 @@ class DBConnector:
 
     def execute_query(self, query, params=None, fetch=True):
         """
-        SQL sorgusunu çalıştırır ve sonucu döndürür.
+        Executes a SQL query on the connected database.
         """
         if not self.conn:
             self.connect()

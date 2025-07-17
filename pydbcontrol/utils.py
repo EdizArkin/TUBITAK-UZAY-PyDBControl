@@ -1,10 +1,10 @@
 """
-Utils: Yardımcı fonksiyonlar ve şema doğrulama işlemleri.
+Utils: Helper functions and schema validation operations.
 """
 class Utils:
     @staticmethod
     def validate_schema(table_columns: list, expected_columns: list) -> bool:
         """
-        Tablo kolonlarının beklenen şemaya uyup uymadığını kontrol eder.
+        Checks whether the table columns conform to the expected schema.
         """
         return set(table_columns) == set(expected_columns)
