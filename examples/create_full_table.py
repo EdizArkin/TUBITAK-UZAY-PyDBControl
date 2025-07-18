@@ -15,7 +15,7 @@ db = DBConnector()
 db.connect()
 
 # Initialize TableManager
-table_manager = TableManager(db)
+table_manager = TableManager(db, "telecommand_unit2")
 
 # Path to your SQL model file
 sql_model_path = "model/telecommand_unit2.sql"
