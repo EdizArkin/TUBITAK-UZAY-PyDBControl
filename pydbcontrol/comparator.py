@@ -1,6 +1,8 @@
 """
 Comparator: Class that compares two tables with the same structure.
 """
+
+# Currently it is not in use or under development, it is only in draft form.
 from .db_connector import DBConnector
 
 class Comparator:

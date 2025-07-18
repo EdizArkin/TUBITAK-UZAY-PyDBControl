@@ -11,11 +11,12 @@ def main():
     db.connect()
     table_name = "telecommand_unit2"
     table_manager = TableManager(db, table_name)
-    row_id = 35
+    # Row ID to be updated
+    row_id = 1
 
     # Example of updating a row with new values 
     # row_id = 35 --- IGNORE --- Since the row id can no longer be changed, the remaining changes are applied to row id:35.
-    new_values = {"id": 53, "op_mode":0, "shift_key_mode":5}
+    new_values = {"id": 1, "op_mode":2, "shift_key_mode":5}
     table_manager.update_row(row_id, new_values)
     db.disconnect()
 
