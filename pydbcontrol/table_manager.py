@@ -14,12 +14,16 @@ class TableManager:
     def table_creator(self, model_sql_path: str):
         """
         Reads CREATE TABLE statement from the specified .sql file in the model folder and executes it.
+        After creation, stores the initial schema using Utils.
         Catches and prints user-friendly error messages if the table already exists or other SQL errors occur.
         """
+        from .utils import Utils
         try:
             with open(model_sql_path, "r", encoding="utf-8") as f:
                 sql = f.read()
             self.db.execute_query(sql, fetch=False)
+            # Store initial schema after creation
+            Utils.store_initial_schema(self.db, self.table_name)
             return f"Created successfully: {self.table_name}"
         except Exception as e:
             if hasattr(e, 'pgcode') and e.pgcode == '42P07':  # DuplicateTable
