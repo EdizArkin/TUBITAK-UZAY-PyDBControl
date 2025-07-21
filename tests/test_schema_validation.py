@@ -2,6 +2,10 @@ import pytest
 from pydbcontrol.db_connector import DBConnector
 from pydbcontrol.utils import Utils
 
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 def test_schema_validation():
     db = DBConnector()
     db.connect()
