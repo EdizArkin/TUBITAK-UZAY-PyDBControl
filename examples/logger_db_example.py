@@ -101,6 +101,7 @@ try:
 except Exception as e:
     pass  # Already logged by TableManager
 
+logger.print_log()
 
 db.disconnect()
 print("Logger DB example completed. Check pydbcontrol.log for output.")

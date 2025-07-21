@@ -31,3 +31,18 @@ class Logger:
             self.logger.info(f"{action}: {detail}")
         except Exception as e:
             print(f"Logger error: {e}")
+
+    def print_log(self):
+        """
+        Prints the contents of the log file to the terminal.
+        """
+        try:
+            for handler in self.logger.handlers:
+                if isinstance(handler, logging.FileHandler):
+                    log_file = handler.baseFilename
+                    with open(log_file, 'r', encoding='utf-8') as f:
+                        print(f.read())
+                    return
+            print("No log file handler found.")
+        except Exception as e:
+            print(f"Error reading log file: {e}")
