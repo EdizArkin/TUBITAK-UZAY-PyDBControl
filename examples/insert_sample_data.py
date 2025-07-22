@@ -1,5 +1,5 @@
 """
-insert_sample_data.py: Example inserts 10 rows of data into the telecommand_unit2 table
+insert_sample_data.py: Example inserts 10 rows of data into the telecommand_unit_2 table
 """
 import sys
 import os
@@ -12,7 +12,7 @@ from pydbcontrol.table_manager import TableManager
 
 db = DBConnector()
 db.connect()
-tm = TableManager(db, "telecommand_unit2")
+tm = TableManager(db, "telecommand_unit_2")
 
 for i in range(10):
     data = {

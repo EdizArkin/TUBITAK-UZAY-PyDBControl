@@ -14,13 +14,13 @@ import random
 logger = Logger('pydbcontrol.log')
 db = DBConnector()
 db.connect()
-table_name = "telecommand_unit2"
+table_name = "telecommand_unit_2"
 table_manager = TableManager(db, table_name, logger=logger)
 
 
 # 1. Create table from SQL model file
 try:
-    sql_model_path = "model/telecommand_unit2.sql"
+    sql_model_path = "model/telecommand_unit_2.sql"
     result = table_manager.table_creator(sql_model_path)
 except Exception as e:
     pass  # Already logged by TableManager

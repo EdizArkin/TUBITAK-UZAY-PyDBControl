@@ -11,7 +11,7 @@ from pydbcontrol.utils import Utils
 def main():
     db = DBConnector()
     db.connect()
-    table_name1 = "telecommand_unit2"
+    table_name1 = "telecommand_unit_2"
     table_name2 = "ifm"
 
     # Validate schema (should print 'passed' if unchanged, warnings if changed)

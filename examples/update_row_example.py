@@ -9,7 +9,7 @@ from pydbcontrol.db_connector import DBConnector
 def main():
     db = DBConnector()
     db.connect()
-    table_name = "telecommand_unit2"
+    table_name = "telecommand_unit_2"
     table_manager = TableManager(db, table_name)
     # Row ID to be updated
     row_id = 1

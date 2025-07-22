@@ -15,10 +15,10 @@ db = DBConnector()
 db.connect()
 
 # Initialize TableManager
-table_manager = TableManager(db, "telecommand_unit2")
+table_manager = TableManager(db, "telecommand_unit_2")
 
 # Path to your SQL model file
-sql_model_path = "model/telecommand_unit2.sql"
+sql_model_path = "model/telecommand_unit_2.sql"
 
 # Create table from SQL model
 result = table_manager.table_creator(sql_model_path)
