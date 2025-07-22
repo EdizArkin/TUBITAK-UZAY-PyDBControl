@@ -11,10 +11,12 @@ from pydbcontrol.utils import Utils
 def main():
     db = DBConnector()
     db.connect()
-    table_name = "telecommand_unit2"
+    table_name1 = "telecommand_unit2"
+    table_name2 = "ifm"
 
     # Validate schema (should print 'passed' if unchanged, warnings if changed)
-    Utils.validate_schema(db, table_name)
+    Utils.validate_schema(db, table_name1)
+    Utils.validate_schema(db, table_name2)
 
     db.disconnect()
 

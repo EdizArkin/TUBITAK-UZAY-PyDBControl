@@ -89,6 +89,4 @@ Create table telemetry_unit(
     telemetry_frametime integer CHECK(telemetry_frametime IN(0,1,2)),
     telemetrymessage_counter bigint  CHECK(telemetrymessage_counter BETWEEN 0 and 4294967295 ),
     tx_linkstatus integer CHECK(tx_linkstatus IN(0,1,2,3,16))
-
-
 );

@@ -109,7 +109,7 @@ logs = logger.get_log()
 print("Logs retrieved from logger:", logs)
 
 # Clear the log file.
-logger.clear_log()
+#logger.clear_log()
 
 db.disconnect()
 print("Logger DB example completed. Check pydbcontrol.log for output.")

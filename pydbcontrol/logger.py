@@ -2,8 +2,6 @@
 Logger: Class that writes the operation history to a log file.
 """
 
-# Currently it is not in use or under development, it is only in draft form.
-
 import logging
 
 class Logger:
