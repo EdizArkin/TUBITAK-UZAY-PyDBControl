@@ -26,7 +26,7 @@ except Exception as e:
     pass  # Already logged by TableManager
 
 # 2. Insert row
-for i in range(5):
+for i in range(2):
     row_data = {
         "bit_rate": random.uniform(10, 5000000),
         "tctone_f1_hz": random.uniform(100, 100000),
@@ -101,7 +101,15 @@ try:
 except Exception as e:
     pass  # Already logged by TableManager
 
-logger.print_log()
+# Print the log
+#logger.print_log()
+
+# Get the log directly
+logs = logger.get_log()
+print("Logs retrieved from logger:", logs)
+
+# Clear the log file.
+logger.clear_log()
 
 db.disconnect()
 print("Logger DB example completed. Check pydbcontrol.log for output.")
