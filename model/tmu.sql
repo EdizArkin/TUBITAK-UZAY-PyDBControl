@@ -91,9 +91,4 @@ Create table telemetry_unit(
     tx_linkstatus integer CHECK(tx_linkstatus IN(0,1,2,3,16))
 
 
-
-
-
-
-
 );

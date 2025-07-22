@@ -52,22 +52,3 @@ carrier_frequency_compensation float,
 mod_signaleffective integer
 );
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-) 

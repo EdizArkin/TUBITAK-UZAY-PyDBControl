@@ -44,9 +44,3 @@ Create table ifr(
     process_information integer
 );
 
-
-
-
-
- 
-)
