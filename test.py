@@ -4,10 +4,10 @@ from logger import Logger
 
 def test_table_manager():
     logger = Logger()
-    db = DBConnector()   # .env'den veritabanı ayarlarını otomatik okur
+    db = DBConnector()  
     db.connect()
 
-    table_name = "kullanicilar"  # Buraya kendi tablonun adını yaz
+    table_name = "telecommand_unit2" 
     tm = TableManager(db, table_name, logger)
 
     result = tm.get_data(limit=5)
