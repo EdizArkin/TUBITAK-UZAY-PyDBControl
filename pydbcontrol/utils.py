@@ -28,10 +28,10 @@ class Utils:
             print(f"Utils warning: Could not load schema file: {e}")
 
     @classmethod
-    def store_initial_schema(cls, db, table_name: str):
+    def store_initial_schema(cls, db, table_name: str, logger=None):
         """
         Fetches and stores the initial column list for a table from the database (all lowercase).
-        Persists the schema to a JSON file for use across script runs.
+        Persists the schema to a JSON file for use across script runs. Logs if logger is provided.
         """
         try:
             sql = f"SELECT column_name FROM information_schema.columns WHERE table_name = %s ORDER BY ordinal_position"
@@ -43,21 +43,27 @@ class Utils:
                     json.dump({k: list(v) for k, v in cls._initial_schemas.items()}, f, ensure_ascii=False, indent=2)
             except Exception as e:
                 print(f"Utils warning: Could not save schema file: {e}")
+            if logger:
+                logger.log_action('STORE INITIAL SCHEMA', f'Stored initial schema for table {table_name}')
             # For debugging purposes, you can uncomment the next line
             #print(f"Initial schema stored for table '{table_name}': {columns}")
         except Exception as e:
             print(f"Utils error while storing initial schema for '{table_name}': {e}")
+            if logger:
+                logger.log_action('STORE INITIAL SCHEMA ERROR', f'Error storing initial schema for {table_name}: {e}')
 
     @classmethod
-    def validate_schema(cls, db, table_name: str) -> bool:
+    def validate_schema(cls, db, table_name: str, logger=None) -> bool:
         """
         Fetches current columns from the database and compares to the initially stored schema (all lowercase).
-        Prints warnings if columns are missing or extra.
+        Prints warnings if columns are missing or extra. Logs if logger is provided.
         Returns True if schemas match, False otherwise.
         """
         try:
             if table_name not in cls._initial_schemas:
                 print(f"No initial schema stored for table '{table_name}'. Please store it first.")
+                if logger:
+                    logger.log_action('VALIDATE SCHEMA ERROR', f'No initial schema stored for {table_name}')
                 return False
             # Fetch current columns from DB
             sql = f"SELECT column_name FROM information_schema.columns WHERE table_name = %s ORDER BY ordinal_position"
@@ -72,12 +78,20 @@ class Utils:
             extra = current - initial
             if not missing and not extra:
                 print(f"Schema validation passed for table '{table_name}'.")
+                if logger:
+                    logger.log_action('VALIDATE SCHEMA', f'Schema validation passed for {table_name}')
                 return True
             if missing:
                 print(f"Schema validation warning: Missing columns in '{table_name}': {sorted(missing)}")
+                if logger:
+                    logger.log_action('VALIDATE SCHEMA WARNING', f'Missing columns in {table_name}: {sorted(missing)}')
             if extra:
                 print(f"Schema validation warning: Extra columns in '{table_name}': {sorted(extra)}")
+                if logger:
+                    logger.log_action('VALIDATE SCHEMA WARNING', f'Extra columns in {table_name}: {sorted(extra)}')
             return False
         except Exception as e:
             print(f"Utils error during schema validation: {e}")
+            if logger:
+                logger.log_action('VALIDATE SCHEMA ERROR', f'Error validating schema for {table_name}: {e}')
             return False

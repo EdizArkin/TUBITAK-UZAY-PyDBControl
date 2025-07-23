@@ -7,9 +7,9 @@ import psycopg2
 from psycopg2.extras import RealDictCursor
 
 class DBConnector:
-    def __init__(self, host=None, database=None, user=None, password=None, port=None):
+    def __init__(self, host=None, database=None, user=None, password=None, port=None, logger=None):
         """
-        Initializes the DBConnector with connection parameters from the .env file or directly.
+        Initializes the DBConnector with connection parameters and optional Logger.
         The .env file must contain the following keys:
         DB_HOST, DB_NAME, DB_USER, DB_PASSWORD, DB_PORT
         """
@@ -20,6 +20,7 @@ class DBConnector:
         self.password = password or os.getenv("DB_PASSWORD", "")
         self.port = int(port or os.getenv("DB_PORT", 5432))
         self.conn = None
+        self.logger = logger
 
     def connect(self):
         """
@@ -34,6 +35,8 @@ class DBConnector:
             password=self.password,
             port=self.port
         )
+        if self.logger:
+            self.logger.log_action('CONNECT', f'Connected to DB {self.database} at {self.host}:{self.port}')
         return self.conn
 
     def disconnect(self):
@@ -43,6 +46,8 @@ class DBConnector:
         if self.conn:
             self.conn.close()
             self.conn = None
+            if self.logger:
+                self.logger.log_action('DISCONNECT', f'Disconnected from DB {self.database} at {self.host}:{self.port}')
 
     def execute_query(self, query, params=None, fetch=True):
         """

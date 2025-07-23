@@ -9,10 +9,12 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 import random
 from pydbcontrol.db_connector import DBConnector
 from pydbcontrol.table_manager import TableManager
+from pydbcontrol.logger import Logger
 
-db = DBConnector()
+logger = Logger('pydbcontrol.log')
+db = DBConnector(logger=logger)
 db.connect()
-tm = TableManager(db, "tcu_2")
+tm = TableManager(db, "tcu_2", logger=logger)
 
 for i in range(10):
     data = {

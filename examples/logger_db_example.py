@@ -12,7 +12,7 @@ import os
 import random
 
 logger = Logger('pydbcontrol.log')
-db = DBConnector()
+db = DBConnector(logger=logger)
 db.connect()
 table_name = "tcu_2"
 table_manager = TableManager(db, table_name, logger=logger)

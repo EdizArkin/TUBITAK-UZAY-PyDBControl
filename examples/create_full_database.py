@@ -56,47 +56,51 @@ def get_columns_from_sql(sql_path):
                     columns.append((col_name, col_type, constraint_info))
     return columns, pk_col
 
-def generate_row_data(columns, idx=1):
-    # Generate data according to column type and constraints
+def generate_row_data(columns, idx=1, table_name=None):
+    # Generate data according to column type and constraints, with table_name-based offset for uniqueness
     data = {}
+    table_offset = 0
+    if table_name:
+        table_offset = abs(hash(table_name)) % 1000  # Small offset for each table
     for col, col_type, constraint_info in columns:
         # id column
         if col == 'id' or col.endswith('_id'):
-            data[col] = idx
+            data[col] = table_offset + idx
         # IN constraint
         elif 'in' in constraint_info:
             values = constraint_info['in']
-            data[col] = values[idx % len(values)]
+            data[col] = values[(idx + table_offset) % len(values)]
         # BETWEEN constraint
         elif 'between' in constraint_info:
             min_v, max_v = constraint_info['between']
             if 'int' in col_type or 'serial' in col_type or 'bigint' in col_type:
-                data[col] = int((min_v + max_v) // 2 + idx - 1)
-                # Do not go out of range
-                if data[col] < min_v: data[col] = int(min_v)
-                if data[col] > max_v: data[col] = int(max_v)
+                val = int((min_v + max_v) // 2 + idx - 1 + table_offset)
+                if val < min_v: val = int(min_v)
+                if val > max_v: val = int(max_v)
+                data[col] = val
             elif 'float' in col_type or 'double' in col_type or 'real' in col_type:
-                data[col] = round((min_v + max_v) / 2 + (idx-1)*0.1, 3)
-                if data[col] < min_v: data[col] = min_v
-                if data[col] > max_v: data[col] = max_v
+                val = round((min_v + max_v) / 2 + (idx-1)*0.1 + table_offset*0.01, 3)
+                if val < min_v: val = min_v
+                if val > max_v: val = max_v
+                data[col] = val
             else:
                 data[col] = min_v
         # Type based default
         elif 'int' in col_type or 'serial' in col_type or 'bigint' in col_type:
-            data[col] = idx
+            data[col] = table_offset + idx
         elif 'float' in col_type or 'double' in col_type or 'real' in col_type:
-            data[col] = round(0.5 + idx*0.1, 3)
+            data[col] = round(0.5 + idx*0.1 + table_offset*0.01, 3)
         elif 'char' in col_type or 'text' in col_type or 'varchar' in col_type:
-            data[col] = f"test_{idx}"
+            data[col] = f"{table_name or 'table'}_test_{idx}"
         elif 'boolean' in col_type:
-            data[col] = True if idx % 2 == 0 else False
+            data[col] = ((idx + table_offset) % 2 == 0)
         else:
-            data[col] = idx
+            data[col] = table_offset + idx
     return data
 
 def main():
     logger = Logger('pydbcontrol.log')
-    db = DBConnector()
+    db = DBConnector(logger=logger)
     db.connect()
     model_dir = os.path.join(os.path.dirname(__file__), '../model')
     sql_files = [os.path.join(model_dir, f) for f in os.listdir(model_dir) if f.endswith('.sql')]
@@ -110,7 +114,7 @@ def main():
         tm.table_creator(sql_path)
         columns, pk_col = get_columns_from_sql(sql_path)
         for i in range(1, 3):
-            row = generate_row_data(columns, idx=i)
+            row = generate_row_data(columns, idx=i, table_name=table_name)
             # If the primary key is serial, add
             if pk_col and ('serial' in [col_type for col, col_type, _ in columns if col == pk_col]):
                 row.pop(pk_col, None)
