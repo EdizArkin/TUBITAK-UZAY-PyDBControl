@@ -1,0 +1,8 @@
+pyproject.toml
+setup.py
+mylib/tablemanager.c
+mylib.egg-info/PKG-INFO
+mylib.egg-info/SOURCES.txt
+mylib.egg-info/dependency_links.txt
+mylib.egg-info/requires.txt
+mylib.egg-info/top_level.txt

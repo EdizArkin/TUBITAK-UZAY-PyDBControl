@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: mylib
+Version: 0.1.0
+Summary: Generic veritabanı API kütüphanesi
+Author: Senin İsmin
+Requires-Python: >=3.7
+Requires-Dist: psycopg2-binary
+Requires-Dist: python-dotenv
+Requires-Dist: cython
+Dynamic: author
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
