@@ -1,23 +1,33 @@
-"""
-insert_sample_data.py: Example inserts 10 rows of data into the telecommand_unit_2 table
-"""
 import sys
 import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-
-import random
+"""
+logger_db_example.py: Example script to demonstrate logging of real database operations using Logger and SQL model file.
+"""
+from pydbcontrol.logger import Logger
 from pydbcontrol.db_connector import DBConnector
 from pydbcontrol.table_manager import TableManager
-from pydbcontrol.logger import Logger
+import os
+import random
 
 logger = Logger('pydbcontrol.log')
 db = DBConnector(logger=logger)
 db.connect()
-tm = TableManager(db, "tcu_2", logger=logger)
+table_name = "tcu_2"
+table_manager = TableManager(db, table_name, logger=logger)
 
-for i in range(10):
-    data = {
+
+# 1. Create table from SQL model file
+try:
+    sql_model_path = "model/tcu_2.sql"
+    result = table_manager.table_creator(sql_model_path)
+except Exception as e:
+    pass  # Already logged by TableManager
+
+# 2. Insert row
+for i in range(2):
+    row_data = {
         "bit_rate": random.uniform(10, 5000000),
         "tctone_f1_hz": random.uniform(100, 100000),
         "tctone_f2_hz": random.uniform(100, 100000),
@@ -68,8 +78,38 @@ for i in range(10):
         "tcdataexecute_counter": random.randint(0, 1000),
         "tcstillwait_modulation": random.randint(0, 1000)
     }
-    tm.insert_row(data)
-    print(f"{i+1}. row added.")
+    try:
+        table_manager.insert_row(row_data)
+    except Exception as e:
+        pass  # Already logged by TableManager
+
+# 3. Update row
+try:
+    table_manager.update_row(1, {"op_mode": 0})
+except Exception as e:
+    pass  # Already logged by TableManager
+
+# 4. Select row
+try:
+    table_manager.get_data(filters={"op_mode": 0}, limit=1)
+except Exception as e:
+    pass  # Already logged by TableManager
+
+# 5. Delete row
+try:
+    table_manager.delete_row(1)
+except Exception as e:
+    pass  # Already logged by TableManager
+
+# Print the log
+#logger.print_log()
+
+# Get the log directly
+logs = logger.get_log()
+print("Logs retrieved from logger:", logs)
+
+# Clear the log file.
+#logger.clear_log()
 
 db.disconnect()
-print("10 rows of data were added successfully.")
+print("Logger DB example completed. Check pydbcontrol.log for output.")

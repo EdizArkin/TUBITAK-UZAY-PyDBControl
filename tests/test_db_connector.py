@@ -15,6 +15,3 @@ def test_connect_disconnect():
     db.disconnect()
     print("Disconnected successfully.")
     assert db.conn is None
-
-
-test_connect_disconnect()

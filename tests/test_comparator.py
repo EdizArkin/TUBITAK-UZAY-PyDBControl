@@ -1,6 +1,10 @@
 """
 test_comparator.py: The table comparison Test is not currently in development and testing phase
 """
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 import pytest
 from pydbcontrol.db_connector import DBConnector
 from pydbcontrol.comparator import Comparator

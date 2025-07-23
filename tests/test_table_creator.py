@@ -19,5 +19,3 @@ def test_table_creator():
     print(f"{table_name} table created successfully.")
     db.disconnect()
 
-
-test_table_creator()
