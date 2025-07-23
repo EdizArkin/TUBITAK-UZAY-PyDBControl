@@ -2,14 +2,16 @@ from setuptools import setup, find_packages
 
 setup(
     name="pydbcontrol",
-    version="0.1",
-    packages=find_packages(),
+    version="0.1.0",
+    packages=["pydbcontrol"],
     install_requires=[
-        "psycopg2",
+        'psycopg2-binary',
+        'pandas',
+        'python-dotenv'
     ],
-    author="Ediz Arkin",  # geliştirici adi
-    author_email="",  # maili
-    description="Veritabanı için işlevsel bir API",
+    author="Ediz Arkin Kobak",
+    author_email="arkinediz@gmail.com",
+    description="A Python library to control and compare PostgreSQL tables",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     url="https://github.com/EdizArkin/TUBITAK-UZAY-PyDBControl",
