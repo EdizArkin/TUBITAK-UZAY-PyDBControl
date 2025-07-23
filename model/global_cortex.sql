@@ -1,4 +1,4 @@
--- 1001h: global_cortex.sql
+-- 1001h: global_cortex
 Create table global_cortex(
     gcu_id serial primary key,
     mon_dataflow_id integer ,

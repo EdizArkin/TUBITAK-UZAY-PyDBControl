@@ -1,5 +1,5 @@
--- 1061h: telemetry_unit_b.sql
-Create table telemetry_unit_b(
+-- 1061h: telemetry_unit_b
+Create table tmu_b(
     tmu_id serial  primary key,
     bit_rate float CHECK(bit_rate BETWEEN 7 AND 40000000),
     symbol_ratedvb float Check(symbol_ratedvb BETWEEN 100 AND 20000000),

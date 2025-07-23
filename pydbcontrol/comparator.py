@@ -16,7 +16,7 @@ class Comparator:
         except Exception as e:
             print(f"Comparator init error: {e}")
 
-    def compare_tables(self, table1: str, table2: str, key_column: str = 'id'):
+    def compare_tables(self, table1: str, table2: str, table3: str = None, key_column: str = 'id'):
         """
         Compares two tables by the key column and returns the differences.
         Catches and prints user-friendly error messages if SQL or comparison errors occur.

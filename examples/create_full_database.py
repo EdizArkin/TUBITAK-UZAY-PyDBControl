@@ -103,9 +103,9 @@ def main():
     for sql_path in sql_files:
         table_name = get_table_name_from_sql(sql_path)
         if not table_name:
-            print(f"Tablo adı bulunamadı: {sql_path}")
+            print(f"Table name not found: {sql_path}")
             continue
-        print(f"Tablo oluşturuluyor: {table_name}")
+        print(f"Creating table: {table_name}")
         tm = TableManager(db, table_name, logger=logger)
         tm.table_creator(sql_path)
         columns, pk_col = get_columns_from_sql(sql_path)

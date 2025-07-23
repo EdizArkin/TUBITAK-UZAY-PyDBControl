@@ -1,4 +1,4 @@
--- 1050h: ifr_1.sql
+-- 1050h: ifr_1
 Create table ifr_1(
     ifr_id  serial primary key,
     input_frequencyex float Check(input_frequencyex BETWEEN -1000 AND 1000),

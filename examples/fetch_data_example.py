@@ -13,7 +13,7 @@ db = DBConnector()
 db.connect()
 
 # Table manager
-tm = TableManager(db, "telecommand_unit_2")
+tm = TableManager(db, "tcu_2")
 
 # Filtered data retrieval
 filters = {"op_mode": 2,

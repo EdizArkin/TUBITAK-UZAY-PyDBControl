@@ -12,7 +12,7 @@ from pydbcontrol.table_manager import TableManager
 
 db = DBConnector()
 db.connect()
-tm = TableManager(db, "telecommand_unit_2")
+tm = TableManager(db, "tcu_2")
 
 for i in range(10):
     data = {

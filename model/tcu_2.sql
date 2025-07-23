@@ -1,5 +1,5 @@
--- 1010h: telecommand_unit_2.sql
-CREATE TABLE telecommand_unit_2(
+-- 1010h: telecommand_unit_2
+CREATE TABLE tcu_2(
     id serial PRIMARY KEY,
     bit_rate FLOAT  CHECK(bit_rate BETWEEN 10 AND 5000000),
     tctone_f1_hz FLOAT   CHECK(tctone_f1_hz BETWEEN 100 AND 100000),
