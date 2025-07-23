@@ -6,7 +6,6 @@ setup(
     packages=["pydbcontrol"],
     install_requires=[
         'psycopg2-binary',
-        'pandas',
         'python-dotenv'
     ],
     author="Ediz Arkin Kobak",
