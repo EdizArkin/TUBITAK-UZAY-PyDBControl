@@ -2,18 +2,26 @@
 Logger: Class that writes the operation history to a log file.
 """
 
+import os
 import logging
 
 class Logger:
     def __init__(self, log_file='logs/pydbcontrol.log'):
         """
         Initializes the logger and sets up the log file.
-        Catches and prints user-friendly error messages if logging setup fails.
+        Ensures the log file is always created inside the logs/ directory.
         """
         try:
+            # Always use logs/ as the directory
+            logs_dir = 'logs'
+            if not os.path.exists(logs_dir):
+                os.makedirs(logs_dir)
+            # If user gave just a filename, prepend logs/
+            log_file_name = os.path.basename(log_file)
+            log_file_path = os.path.join(logs_dir, log_file_name)
             self.logger = logging.getLogger('PyDBControlLogger')
             self.logger.setLevel(logging.INFO)
-            fh = logging.FileHandler(log_file)
+            fh = logging.FileHandler(log_file_path)
             formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
             fh.setFormatter(formatter)
             self.logger.addHandler(fh)
