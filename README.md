@@ -206,11 +206,20 @@ pip install -e .
 
 With these steps, PyDBControl will be a reusable, installable Python library/package ready for use in any project or for public distribution!
 
+## Documentation
+
+Detailed documentation including the **Requirements Document** and the **Final Delivery Report** can be found in the `Docs/` folder of this repository.  
+For a deeper understanding of the project scope, design, implementation, and usage, please refer to those files.
+
 ## License
+
 MIT
 
 ## Author
+
 Ediz Arkin Kobak
 
 ## Project URL
+
 https://github.com/EdizArkin/TUBITAK-UZAY-PyDBControl
+AK-UZAY-PyDBControl

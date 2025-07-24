@@ -1,9 +1,37 @@
 @startuml
-actor Kullanici
-package "PyDBControl Kütüphanesi" {
-  [API Katmanı] --> [İş Mantığı Katmanı]
-  [İş Mantığı Katmanı] --> [Veri Erişim Katmanı]
-  [Veri Erişim Katmanı] --> [PostgreSQL Veritabanı]
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam defaultTextAlignment center
+skinparam rectangle {
+  BackgroundColor #F3F3F3
+  BorderColor black
 }
-Kullanici --> [API Katmanı]
+
+actor User
+
+package "PyDBControl Library" {
+
+  rectangle "TableManager\n(table_manager.py)" as TableManager
+  rectangle "Comparator\n(comparator.py)" as Comparator
+  rectangle "Utils\n(utils.py)" as Utils
+  rectangle "Logger\n(logger.py)" as Logger
+  rectangle "DBConnector\n(db_connector.py)" as DBConnector
+  rectangle "PostgreSQL Database" as Database
+
+  User --> TableManager : calls functions
+  User --> Comparator : calls functions
+  User --> Utils : calls functions
+
+  TableManager --> DBConnector : uses
+  Comparator --> DBConnector : uses
+  Utils --> DBConnector : uses
+
+  TableManager --> Logger : logs
+  Comparator --> Logger : logs
+  Utils --> Logger : logs
+
+  DBConnector --> Database : connects to
+
+}
+
 @enduml

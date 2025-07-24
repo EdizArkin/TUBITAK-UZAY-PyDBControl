@@ -1,27 +1,61 @@
 @startuml
+skinparam classAttributeIconSize 0
+skinparam classFontSize 14
+skinparam classBackgroundColor #FAFAFA
+
+
 class DBConnector {
+  -host: str
+  -database: str
+  -user: str
+  -password: str
+  -port: str
+  -logger: Logger
   +connect()
   +disconnect()
-  +execute_query()
+  +execute_query(query, params=None, fetch=True)
 }
+
 class TableManager {
-  +get_data()
-  +insert_row()
-  +update_row()
-  +delete_row()
+  -db: DBConnector
+  -table_name: str
+  -logger: Logger
+  +get_primary_key_col()
+  +table_creator(model_sql_path: str)
+  +get_data(filters=None, limit=50)
+  +insert_row(data: dict)
+  +update_row(row_id: int, new_values: dict)
+  +delete_row(row_id: int)
+  
 }
+
 class Comparator {
-  +compare_tables()
+  -db: DBConnector
+  -logger: Logger
+  +compare_tables(self, *tables, key_column: str = 'id')
 }
-class Logger {
-  +log_action()
-}
+
 class Utils {
-  +validate_schema()
+  +store_initial_schema(cls, db, table_name: str, logger=None)
+  +validate_schema(cls, db, table_name: str, logger=None) -> bool:
 }
-DBConnector <.. TableManager
-Logger <.. TableManager
+
+class Logger {
+  -log_file: str
+  +log_action(action: str, detail: str = "")
+  +get_log()
+  +print_log()
+  +clear_log()
+}
+
+
+TableManager --> DBConnector
+TableManager --> Logger
+
 Comparator --> DBConnector
 Comparator --> Logger
-Utils <.. TableManager
+
+Utils --> DBConnector
+Utils --> Logger
+
 @enduml
