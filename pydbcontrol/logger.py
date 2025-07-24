@@ -5,7 +5,7 @@ Logger: Class that writes the operation history to a log file.
 import logging
 
 class Logger:
-    def __init__(self, log_file='pydbcontrol.log'):
+    def __init__(self, log_file='logs/pydbcontrol.log'):
         """
         Initializes the logger and sets up the log file.
         Catches and prints user-friendly error messages if logging setup fails.
