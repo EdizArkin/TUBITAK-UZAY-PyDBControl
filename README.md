@@ -1,8 +1,8 @@
-# PyDBControl
+# PyDBControl 🐍
 
 A Python library to control, manage, and compare PostgreSQL tables with ease. Designed for robust database automation, schema validation, and table comparison, PyDBControl is ideal for ETL, data validation, and database testing workflows.
 
-## Features
+## ✨ Features
 
 - **Automated Table Creation**: Create tables from SQL model files and insert valid sample data automatically, respecting all column constraints (e.g., `CHECK`, `IN`, `BETWEEN`, `PRIMARY KEY`).
 - **Dynamic Primary Key Detection**: Handles tables with any primary key name, not just `id`.
@@ -13,7 +13,7 @@ A Python library to control, manage, and compare PostgreSQL tables with ease. De
 - **Modular Design**: Core classes for DB connection, table management, comparison, logging, and utilities.
 - **Example Scripts**: Ready-to-use examples for table creation, data insertion, and table comparison.
 
-## System Overview
+## 🗂️ System Overview
 
 PyDBControl is organized into several core modules:
 
@@ -25,9 +25,9 @@ PyDBControl is organized into several core modules:
 - `model/`: Contains SQL files defining your database tables.
 - `examples/`: Example scripts for creating tables, inserting data, and comparing tables.
 
-## Example Usage
+## 📚 Example Usage
 
-### 1. Create All Tables and Insert Sample Data
+### 1️⃣ Create All Tables and Insert Sample Data
 
 ```python
 from pydbcontrol.db_connector import DBConnector
@@ -49,7 +49,7 @@ for sql_path in sql_files:
 db.disconnect()
 ```
 
-### 2. Compare Tables
+### 2️⃣ Compare Tables
 
 ```python
 from pydbcontrol.db_connector import DBConnector
@@ -65,7 +65,7 @@ print(diff)
 db.disconnect()
 ```
 
-### 3. Validate Table Schema
+### 3️⃣ Validate Table Schema
 
 ```python
 from pydbcontrol.db_connector import DBConnector
@@ -80,25 +80,25 @@ Utils.validate_schema(db, 'my_table', logger=logger)
 db.disconnect()
 ```
 
-## Installation
+## 📦 Installation
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## Requirements
+## 📝 Requirements
 - Python 3.7+
 - PostgreSQL database
 - See `requirements.txt` for Python dependencies
 
-## Logging
+## 🪵 Logging
 All actions and errors are logged to `pydbcontrol.log` by default. You can change the log file name when initializing the `Logger`.
 
-## How to Package and Distribute PyDBControl as a Python Library
+## 📦🚀 How to Package and Distribute PyDBControl as a Python Library
 
 Follow these steps to turn this project into a reusable Python library that can be installed via pip, shared on PyPI, or used in other projects:
 
-### 1. Organize Your Project Structure
+### 🗂️ 1. Organize Your Project Structure
 
 Your project should look like this:
 
@@ -115,18 +115,18 @@ TUBITAK-UZAY-PyDBControl/
 └── ...
 ```
 
-### 2. Ensure `__init__.py` Exists
+### 🧩 2. Ensure `__init__.py` Exists
 
 Make sure there is an `__init__.py` file in the `pydbcontrol` directory. This makes it a Python package.
 
-### 3. Update `setup.py`
+### 🛠️ 3. Update `setup.py`
 
 Your `setup.py` should already be configured (see above). Make sure:
 - `packages=find_packages() OR packages=["pydbcontrol"]` includes your main package.
 - `install_requires` lists all dependencies.
 - Metadata (author, description, etc.) is correct.
 
-### 4. (Optional) Add a `pyproject.toml`
+### 📝 4. (Optional) Add a `pyproject.toml`
 
 For modern packaging, you can add a `pyproject.toml` for build system requirements:
 
@@ -136,7 +136,7 @@ requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 ```
 
-### 5. Build the Package
+### 🏗️ 5. Build the Package
 
 From the project root, run:
 
@@ -146,7 +146,7 @@ python setup.py sdist bdist_wheel
 
 This will create `dist/pydbcontrol-<version>.tar.gz` and `.whl` files.
 
-### 6. Test the Package Locally
+### 🧪 6. Test the Package Locally
 
 Install your package in a virtual environment to test:
 
@@ -160,7 +160,7 @@ Then try importing it in Python:
 from pydbcontrol.db_connector import DBConnector
 ```
 
-### 7. (Optional) Publish to PyPI
+### 🌐 7. (Optional) Publish to PyPI
 
 1. Register on [PyPI](https://pypi.org/).
 2. Install Twine:
@@ -172,7 +172,7 @@ from pydbcontrol.db_connector import DBConnector
    twine upload dist/*
    ```
 
-### 8. Use in Other Projects
+### 🔗 8. Use in Other Projects
 
 If the library is local (not published to PyPI), install directly from the wheel file:
 
@@ -192,12 +192,12 @@ Or, for local development, use:
 pip install -e .
 ```
 
-### 9. Versioning and Updates
+### 🏷️ 9. Versioning and Updates
 
 - Update the `version` in `setup.py` for each release.
 - Tag releases in git for best practice.
 
-### 10. Documentation
+### 📖 10. Documentation
 
 - Keep `README.md` up to date.
 - Optionally, add docstrings and use tools like Sphinx for API docs.
@@ -206,20 +206,19 @@ pip install -e .
 
 With these steps, PyDBControl will be a reusable, installable Python library/package ready for use in any project or for public distribution!
 
-## Documentation
+## 📄 Documentation
 
 Detailed documentation including the **Requirements Document** and the **Final Delivery Report** can be found in the `Docs/` folder of this repository.  
 For a deeper understanding of the project scope, design, implementation, and usage, please refer to those files.
 
-## License
+## 🪪 License
 
 MIT
 
-## Author
+## 👤 Author
 
 Ediz Arkin Kobak
 
-## Project URL
+## 🔗 Project URL
 
 https://github.com/EdizArkin/TUBITAK-UZAY-PyDBControl
-AK-UZAY-PyDBControl
